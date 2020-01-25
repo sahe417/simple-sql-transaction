@@ -6,6 +6,20 @@ LANT=C; export LANG
 PATH='/usr/bin:/bin'
 IFS=$(printf ' \t\n_'); IFS=${IFS%_}
 
+usage()
+{
+  exec >&2
+  echo "usage: `basename \"$0\"` [ -t TABLE_NAME ] [ -s SID ] [ -i Interval ] [ -u DB USER ] [ -p DB PASSWORD ] [ -n NET IDENTIFIED ] [ -l ]"
+  echo '    -t table name default TEST_TABLE'
+  echo '    -s ORACLE_SID Default orcl'
+  echo '    -i Interval Time for Query Transaction'
+  echo '    -u Oracle Database User Default oracle' 
+  echo '    -p Oracle Database User Password Default passwd'
+  echo '    -n Network Identified in tnsname.ora'
+  echo '    -l enbale logging mode'
+  echo '    -h Print option help.'
+  exit "${1-127}"
+}
 
 unset OPTT OPTS OPTI OPTU OPTP OPTN OPTL
 while getopts hlt:i:s:u:p:n: OPT; do
@@ -42,22 +56,6 @@ SLP=${OPTI-10}
 
 # Table name
 TBL=${OPTT-"TEST_TABLE"}
-
-
-usage()
-{
-  exec >&2
-  echo "usage: `basename \"$0\"` [ -t TABLE_NAME ] [ -s SID ] [ -i Interval ] [ -u DB USER ] [ -p DB PASSWORD ] [ -n NET IDENTIFIED ] [ -l ]"
-  echo '    -t table name default TEST_TABLE'
-  echo '    -s ORACLE_SID Default orcl'
-  echo '    -i Interval Time for Query Transaction'
-  echo '    -u Oracle Database User Default oracle' 
-  echo '    -p Oracle Database User Password Default passwd'
-  echo '    -n Network Identified in tnsname.ora'
-  echo '    -l enbale logging mode'
-  echo '    -h Print option help.'
-  exit "${1-127}"
-}
 
 
 echo()
