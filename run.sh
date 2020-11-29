@@ -208,10 +208,7 @@ lockfile=/tmp/$(echo $0 | sed -e 's/\.sh//').loc
 test -f "$lockfile" && exit 1
 echo $$ > "$lockfile"
 
-
 trap 'rm -fr "$lockfile"; exit 1'  1 2 3 15
-
-# Initialize
 DROP_TABLE
 CREATE_TABLE
 
