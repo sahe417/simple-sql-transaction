@@ -8,17 +8,17 @@ IFS=$(printf ' \t\n_'); IFS=${IFS%_}
 
 usage()
 {
-  exec >&2
-  echo "usage: `basename \"$0\"` [ -t TABLE_NAME ] [ -s SID ] [ -i Interval ] [ -u DB USER ] [ -p DB PASSWORD ] [ -n NET IDENTIFIED ] [ -l ]"
-  echo '    -t table name default TEST_TABLE'
-  echo '    -s ORACLE_SID Default orcl'
-  echo '    -i Interval Time for Query Transaction'
-  echo '    -u Oracle Database User Default oracle' 
-  echo '    -p Oracle Database User Password Default passwd'
-  echo '    -n Network Identified in tnsname.ora'
-  echo '    -l enbale logging mode'
-  echo '    -h Print option help.'
-  exit "${1-127}"
+	exec >&2
+	echo "usage: `basename \"$0\"` [ -t TABLE_NAME ] [ -s SID ] [ -i Interval ] [ -u DB USER ] [ -p DB PASSWORD ] [ -n NET IDENTIFIED ] [ -l ]"
+	echo '    -t table name default TEST_TABLE'
+	echo '    -s ORACLE_SID Default orcl'
+	echo '    -i Interval Time for Query Transaction'
+	echo '    -u Oracle Database User Default oracle' 
+	echo '    -p Oracle Database User Password Default passwd'
+	echo '    -n Network Identified in tnsname.ora'
+	echo '    -l enbale logging mode'
+	echo '    -h Print option help.'
+	exit "${1-127}"
 }
 
 unset OPTT OPTS OPTI OPTU OPTP OPTN OPTL
@@ -60,7 +60,7 @@ TBL=${OPTT-"TEST_TABLE"}
 
 echo()
 {
-  printf '%s\n' "$*"
+	printf '%s\n' "$*"
 }
 
 
@@ -88,7 +88,7 @@ logging()
 CREATE_TABLE()
 {
 	( echo "CREATE TABLE $TBL(A NUMBER PRIMARY KEY, B VARCHAR(100), C TIMESTAMP DEFAULT SYSTIMESTAMP);"
-	  echo 'exit') | $SQLPLUS >/dev/null 2>&1
+		echo 'exit') | $SQLPLUS >/dev/null 2>&1
 }
 
 
@@ -216,12 +216,12 @@ CREATE_TABLE
 while :
 do
 	_count=$(($RANDOM % 10)) 
-    test "$_count" -eq 0 && DELETE_TABLE
-    test "$_count" -eq 1 && UPDATE_TABLE
-    test "$_count" -ge 2 -a "$_count" -le 7 && INSERT_TABLE
-    test "$_count" -ge 8 -a "$_count" -le 9 && SELECT_TABLE
+		test "$_count" -eq 0 && DELETE_TABLE
+		test "$_count" -eq 1 && UPDATE_TABLE
+		test "$_count" -ge 2 -a "$_count" -le 7 && INSERT_TABLE
+		test "$_count" -ge 8 -a "$_count" -le 9 && SELECT_TABLE
 
-    sleep "$SLP"
+		sleep "$SLP"
 done | $SQLPLUS
 
 exit 0
