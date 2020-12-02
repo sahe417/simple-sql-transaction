@@ -57,12 +57,10 @@ SLP=${OPTI-10}
 # Table name
 TBL=${OPTT-"TEST_TABLE"}
 
-
 echo()
 {
   printf '%s\n' "$*"
 }
-
 
 logging()
 {
@@ -81,7 +79,6 @@ logging()
   fi
 }
 
-
 # ---------------------------------------------------
 # FUNCTION CREATE TABLE
 # ---------------------------------------------------
@@ -91,7 +88,6 @@ CREATE_TABLE()
     echo 'exit') | $SQLPLUS >/dev/null 2>&1
 }
 
-
 # ---------------------------------------------------
 # FUNCTION DROP TABLE
 # ---------------------------------------------------
@@ -99,7 +95,6 @@ DROP_TABLE()
 {
   ( echo "DROP TABLE $TBL;" ) | $SQLPLUS >/dev/null 2>&1
 }
-
 
 # ---------------------------------------------------
 # FUNCTION SELECT COUNT()
@@ -116,7 +111,6 @@ SELECT_COUNT()
   echo $row
 }
 
-
 # ---------------------------------------------------
 # FUNCTION SELECT MAX()
 # ---------------------------------------------------
@@ -132,7 +126,6 @@ SELECT_MAX()
   echo $max
 }
 
-
 # ---------------------------------------------------
 # FUNCTION INSERT TABLE
 # ---------------------------------------------------
@@ -146,7 +139,6 @@ INSERT_TABLE()
   echo "$SQL"; echo "COMMIT;"
   return
 }
-
 
 # ---------------------------------------------------
 # FUNCTION DELETE TABLE
@@ -162,7 +154,6 @@ DELETE_TABLE()
   return
 }
 
-
 # ---------------------------------------------------
 # FUNCTION UPDATE TABLE
 # ---------------------------------------------------
@@ -177,7 +168,6 @@ UPDATE_TABLE()
   echo "$SQL"; echo "COMMIT;"
   return
 }
-
 
 # ---------------------------------------------------
 # FUNCTION SELECT TABLE
@@ -199,19 +189,16 @@ SELECT_TABLE()
   return
 }
 
-
 # ---------------------------------------------------
 # Main
 # ---------------------------------------------------
-
 lockfile=/tmp/$(echo $0 | sed -e 's/\.sh//').loc
 test -f "$lockfile" && exit 1
 echo $$ > "$lockfile"
-
 trap 'rm -fr "$lockfile"; exit 1'  1 2 3 15
+
 DROP_TABLE
 CREATE_TABLE
-
 # Main Loop
 while :
 do
@@ -223,5 +210,4 @@ do
 
     sleep "$SLP"
 done | $SQLPLUS
-
 exit 0
