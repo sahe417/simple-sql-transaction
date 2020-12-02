@@ -203,11 +203,10 @@ CREATE_TABLE
 while :
 do
   _count=$(($RANDOM % 10)) 
-    test "$_count" -eq 0 && DELETE_TABLE
-    test "$_count" -eq 1 && UPDATE_TABLE
-    test "$_count" -ge 2 -a "$_count" -le 7 && INSERT_TABLE
-    test "$_count" -ge 8 -a "$_count" -le 9 && SELECT_TABLE
-
-    sleep "$SLP"
+  test "$_count" -eq 0 && DELETE_TABLE
+  test "$_count" -eq 1 && UPDATE_TABLE
+  test "$_count" -ge 2 -a "$_count" -le 7 && INSERT_TABLE
+  test "$_count" -ge 8 -a "$_count" -le 9 && SELECT_TABLE
+  sleep "$SLP"
 done | $SQLPLUS
 exit 0
